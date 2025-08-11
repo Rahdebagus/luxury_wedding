@@ -1,6 +1,14 @@
 @extends('layouts.guest.app')
 
-@section('title', 'Undangan – Save the Date')
+@section('title', 'Upacara Mesangih Suci')
+
+@section('meta')
+<meta property="og:title" content="Upacara Mesangih Suci">
+<meta property="og:description" content="Kami mengundang kehadiran Bapak/Ibu/Saudara/i untuk turut hadir, menyaksikan, dan memberikan doa restu.">
+    <meta property="og:image" content="https://balineseday.my.id/img/Bersama_1.jpg">
+    <meta property="og:url" content="https://balineseday.my.id">
+    <meta property="og:type" content="website">
+@endsection
 
 @section('content')
     {{--  NAVIGASI (Theme Toggle)  --}}
