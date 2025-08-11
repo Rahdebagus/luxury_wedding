@@ -12,7 +12,7 @@ onReady(() => {
     const bgB = document.querySelector(".hero-bg.bg-b");
     if (!bgA || !bgB) return;
 
-    const photos = ["../img/Bersama_1.jpg", "../img/Bersama_3.jpg"];
+    const photos = ["../img/balinese.png", "../img/balinese.png"];
 
     photos.forEach((src) => {
         const i = new Image();
@@ -242,8 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     new Typed("#typed-text", {
         strings: [
-            "Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami bermaksud melaksanakan upacara Mesangih (Potong Gigi) putra dan putri kami.",
-            // Baris kedua: ajakan hadir
+            "Atas Asung Kerta Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami bermaksud melaksanakan upacara adat Dewa Yadnya Piodalan Ngenteg Linggih Mupuk Pedagingan Lan Mepandes utawi Potong Gigi",
         ],
         typeSpeed: 40,
         backSpeed: 0,
