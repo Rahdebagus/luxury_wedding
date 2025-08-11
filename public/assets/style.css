@@ -1,0 +1,1362 @@
+/* =========================================================
+      1) ROOT VARIABLES: warna, font, ukuran, spacing
+      ========================================================= */
+:root {
+    /* Warna */
+    --color-bg: #faf5ea;
+    --color-text: #4a3c31;
+    --color-primary: #d2b48c;
+    --color-secondary: #8b4513;
+    --color-light: #ffffff;
+    --accent: #a17d4e;
+    --glass-bg: rgba(255, 255, 255, 0.2);
+
+    /* Tipografi */
+    --font-family-base: "Montserrat", sans-serif;
+    --font-family-heading: "Playfair Display", serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 2.5rem;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Breakpoints */
+    --bp-sm: 576px;
+    --bp-md: 768px;
+    --bp-lg: 992px;
+    --bp-xl: 1200px;
+
+    --header-h: 64px;
+}
+
+/* =========================================================
+      DARK MODE (override variable)
+      ========================================================= */
+body[data-theme="dark"] {
+    --color-bg: #1e1e1e;
+    --color-text: #e5e5e5;
+    --color-primary: #c79c4f;
+    --glass-bg: rgba(30, 30, 30, 0.4);
+}
+
+/* =========================================================
+      RESET & GLOBAL
+      ========================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body,
+html {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-md);
+    color: var(--color-text);
+    line-height: 1.4;
+    height: 100%;
+    margin: 0;
+}
+
+.site-header {
+    position: sticky;
+    height: var(--header-h);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.site-header .header-inner {
+    pointer-events: auto;
+    width: 100%;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--color-text);
+}
+
+.site-header.scrolled .header-inner {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+.site-header.hide .header-inner {
+    transform: translateY(-140%);
+    opacity: 0;
+}
+
+.brand {
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav {
+    display: flex;
+    gap: 14px;
+}
+.nav a {
+    text-decoration: none;
+    font-size: 0.95rem;
+    color: inherit;
+    opacity: 0.9;
+}
+.nav a:hover {
+    opacity: 1;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 9999px;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Supaya konten tidak ketutup header di device yang header-nya non-fixed */
+.has-header {
+    padding-top: calc(var(--header-h) + 16px);
+}
+
+/* Responsive kecil: sembunyikan sebagian nav jika perlu */
+@media (max-width: 480px) {
+    .nav {
+        gap: 10px;
+    }
+    .nav a {
+        font-size: 0.9rem;
+    }
+}
+/* =========================================================
+      DARK-MODE TOGGLE BUTTON
+      ========================================================= */
+/* .theme-toggle {
+
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    color: var(--color-text);
+    border: none;
+    background: none;
+} */
+.theme-toggle {
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  border: none;
+  padding: var(--spacing-sm);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  z-index: 1000;
+}
+
+/* =========================================================
+      SAVE THE DATE SECTION
+      ========================================================= */
+
+.hero-cover {
+    min-height: 100vh;
+    height: 100vh; /* pastikan penuh */
+    position: relative;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1.2s ease;
+    z-index: 0;
+}
+
+.hero-bg.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hero-cover .container {
+    flex: 1; /* isi tinggi sisa */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* dorong ke bawah */
+    align-items: center;
+    padding-bottom: 5rem; /* jarak dari bawah */
+    text-align: center;
+    color: white;
+    z-index: 999;
+}
+
+/* Overlay gelap di atas foto, tapi tidak blokir klik */
+.hero-cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.35));
+    z-index: 1;
+    pointer-events: none; /* << penting: jangan halangi klik */
+}
+
+/* Sedikit blur + scale agar pinggir tak tajam */
+.hero-bg {
+    filter: blur(1px);
+    transform: scale(1.03);
+    will-change: opacity, transform, filter;
+}
+
+/* state fade */
+.hero-bg.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/*  */
+.save-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertikal */
+    align-items: center; /* horizontal */
+    min-height: 100vh; /* penuh viewport */
+}
+
+.container.hero-content {
+    margin-bottom: 50px;
+}
+/* Teks judul & subjudul */
+.title {
+    font-size: var(--font-size-xl);
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    text-align: center;
+}
+
+.subtitle {
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.divider {
+    width: 50%;
+    height: 1px;
+    background: var(--color-text);
+    border: none;
+    margin: var(--spacing-md) auto;
+}
+
+/* Inisial & nama */
+.initials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.initial {
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.amp {
+    font-size: 4rem;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.names {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-sm);
+}
+
+.name {
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.wedding-date {
+    margin-top: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.wedding-location {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    text-align: center;
+}
+.invite {
+    margin-top: var(--spacing-lg);
+    text-align: center;
+}
+
+.invitee-label {
+    opacity: 0.85;
+    letter-spacing: 0.08em;
+    font-size: var(--font-size-sm);
+}
+
+.invitee-name {
+    font-weight: 700;
+    font-size: var(--font-size-md);
+    margin-top: var(--spacing-md);
+    letter-spacing: 0.04em;
+}
+
+/* =========================================================
+      COUNTDOWN TIMER & BUTTON
+      ========================================================= */
+.countdown {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.countdown-item {
+    text-align: center;
+}
+
+.count-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.count-label {
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.1em;
+}
+
+.open-invitation-btn {
+    text-align: center;
+    background: var(--color-primary);
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-size-md);
+    border: none;
+    border-radius: 0.25rem;
+    color: #fff;
+}
+
+/* =========================================================
+      BOTTOM NAVIGATION
+      ========================================================= */
+.bottom-nav {
+    position: fixed;
+    bottom: var(--spacing-lg);
+    left: 50%;
+    transform: translateX(-50%); /* center container */
+
+    width: 90%;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center; /* center items */
+    gap: var(--spacing-xl);
+    padding: var(--spacing-sm) var(--spacing-lg);
+
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.bottom-nav .nav-item {
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    text-decoration: none;
+    position: relative;
+}
+
+/* =========================================================
+      INVITATION SECTION
+      ========================================================= */
+.invitation-section {
+    position: relative;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: var(--color-bg);
+    text-align: center;
+    overflow: hidden;
+}
+
+.invitation-message {
+    background: var(--color-bg, #faf5ea);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center;
+}
+
+/* Judul aksara Bali */
+.balinese-title {
+    display: flex; /* bukan "d: flex" */
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+}
+
+.balinese-title .balinese-title-content {
+    max-width: 100px;
+    width: 100%;
+    height: auto;
+    animation: Scale 3s ease-in-out infinite;
+    animation-delay: 0.4s;
+    z-index: 999;
+}
+
+/* Deskripsi & teks undangan */
+.invitation-description {
+    height: 120px;
+    overflow: hidden;
+    font-size: 2rem;
+    margin: var(--spacing-md) 0;
+    color: var(--color-text);
+}
+
+.invitation-text {
+    font-family: var(--font-family-base, "Montserrat"), sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    text-align: center;
+}
+
+.invitation-ornament {
+    display: block;
+    margin: 0 auto;
+    max-width: 250px;
+    width: 80%;
+    opacity: 0.9;
+}
+
+/* =========================================================
+      PHOTO SECTION (responsif)
+      ========================================================= */
+.photo-content {
+    padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.photo-frame {
+    width: 300px;
+    aspect-ratio: 300 / 360;
+    margin: 0 auto; /* center foto */
+    animation: Scale 6s ease-in-out infinite;
+}
+
+.photo-frame .photo {
+    width: 100%;
+    height: auto;
+}
+
+.profile-text {
+    text-align: center;
+    margin-top: var(--spacing-sm);
+}
+
+/* Side ornaments */
+.invitation-section .side-ornament {
+    position: absolute;
+    width: 120px;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 1;
+    animation: rotateScale 6s ease-in-out infinite;
+}
+
+.invitation-section .side-ornament.left {
+    top: 0;
+    left: -40px;
+    transform: translate(0, 0);
+}
+
+.invitation-section .side-ornament.left-bottom {
+    bottom: 0;
+    left: -40px;
+    transform: translate(0, 0);
+}
+
+.invitation-section .side-ornament.right {
+    bottom: 0;
+    right: -40px;
+    transform: translate(0, 0);
+}
+
+/* Teks profil */
+.profile-text .name {
+    font-size: 2rem;
+    font-family: var(--font-family-heading);
+    padding: var(--spacing-md);
+}
+
+.profile-text .fullname {
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    padding: var(--spacing-sm);
+}
+
+.profile-text .subtitle {
+    font-size: 0.75rem;
+    padding: var(--spacing-sm);
+}
+
+.profile-text .parents {
+    font-size: 0.9rem;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+}
+
+/* =========================================================
+      DETAILS SECTION
+      ========================================================= */
+.details-section .container {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.details-section .top-ornament {
+    display: block;
+    margin: 0 auto var(--spacing-md);
+    max-width: 200px;
+}
+
+.details-section .details-title {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-xl);
+    margin: 0;
+    line-height: 1;
+}
+
+.details-section .details-divider {
+    width: 60%;
+    height: 1px;
+    background: var(--color-text);
+    border: none;
+    margin: var(--spacing-md) auto;
+}
+
+.details-section .details-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-lg);
+    font-size: var(--font-size-lg);
+    font-weight: 400;
+}
+
+.details-section .details-date .number {
+    width: 2ch;
+}
+
+.details-section .details-date .sep {
+    color: var(--color-text);
+}
+
+.details-section .details-location {
+    margin-top: var(--spacing-md);
+    font-size: var(--font-size-lg);
+    letter-spacing: 0.3em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Maps button */
+.details-section .btn-maps {
+    display: block;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    font-size: var(--font-size-md);
+    background: var(--color-secondary);
+    color: var(--color-light);
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--spacing-xs);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.details-section .details-address {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    margin-top: var(--spacing-sm);
+    text-align: center;
+}
+
+/* Ornamen bunga pembungkus */
+.flower_ornamen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-lg);
+}
+
+.flower_ornamen .bottom-ornament {
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+    animation: Scale 3s ease-in-out infinite;
+    animation-delay: 0.4s;
+    z-index: 999;
+}
+
+/* Music player icon state */
+.bottom-nav #music-toggle {
+    /* placeholder untuk style khusus */
+}
+.bottom-nav #music-toggle.active i {
+    color: var(--accent);
+}
+
+/* =========================================================
+      GUESTBOOK SECTION
+      ========================================================= */
+.guestbook-scroll {
+    max-height: 250px; /* tinggi maksimal area komentar */
+    overflow-y: auto; /* aktifkan scroll vertikal */
+    padding-right: 6px; /* supaya isi tidak ketutup scrollbar */
+}
+
+/* Scrollbar untuk browser WebKit (Chrome, Edge, Safari) */
+.guestbook-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.guestbook-scroll::-webkit-scrollbar-track {
+    background: #f3e9da; /* beige */
+    border-radius: 4px;
+}
+
+.guestbook-scroll::-webkit-scrollbar-thumb {
+    background: #c7a37a; /* gold-beige */
+    border-radius: 4px;
+}
+
+.guestbook-scroll::-webkit-scrollbar-thumb:hover {
+    background: #a8855e; /* lebih gelap saat hover */
+}
+
+/* Scrollbar Firefox */
+.guestbook-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #c7a37a #f3e9da;
+}
+
+.guestbook-divider {
+    width: 60%;
+    height: 1px;
+    background: var(--color-text);
+    border: none;
+    margin: 0 auto var(--spacing-lg);
+}
+
+/* Form */
+.guestbook-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.guestbook-form label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+}
+
+.guestbook-form label span {
+    margin-bottom: var(--spacing-xs);
+}
+
+.guestbook-form input,
+.guestbook-form select,
+.guestbook-form textarea {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 0.8px solid var(--color-secondary);
+    border-radius: var(--spacing-xs);
+    font-size: var(--font-size-md);
+    font-family: var(--font-family-base);
+    color: var(--color-text);
+    background: var(--color-light);
+    resize: vertical;
+}
+
+.guestbook-form input::placeholder,
+.guestbook-form textarea::placeholder {
+    color: var(--color-secondary);
+}
+
+.btn-submit {
+    max-width: 120px;
+    align-self: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-md);
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--spacing-xs);
+    background: none;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: var(--color-secondary);
+    color: var(--color-light);
+}
+
+/* Entries list */
+.guestbook-entries {
+    list-style: none;
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: 0 auto;
+}
+
+.guestbook-entries li {
+    text-align: left;
+    border: 0.8px solid var(--color-secondary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+}
+
+.guestbook-entries li:first-child {
+}
+
+.guestbook-entries strong {
+    color: var(--accent);
+}
+
+/* =========================================================
+      GUESTBOOK ITEM (baru)
+      ========================================================= */
+.guestbook-item {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+}
+
+.guestbook-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.guest-name {
+    color: var(--color-primary);
+    font-size: 1.1em;
+}
+
+.guest-attendance {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.9em;
+    background: var(--color-primary);
+    color: var(--color-light);
+}
+
+.guest-message {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+/* =========================================================
+      GALLERY: GRID polishing (gap & hover)
+      ========================================================= */
+.gallery-grid {
+    gap: var(--spacing-md); /* space antar item */
+    padding: var(--spacing-md) 0; /* ruang vertikal antar row */
+}
+
+.gallery-grid > a {
+    border-radius: 10px;
+    overflow: hidden;
+    display: block;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.gallery-grid > a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-grid > a:hover {
+    transform: scale(1.015);
+}
+
+/* =========================================================
+      GALLERY (Swiper + Grid 4 Kolom) — Struktur utama
+      ========================================================= */
+.gallery-section {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ---------- HERO - SWIPER ---------- */
+.gallery-hero {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* Mobile: feel fullscreen */
+@media (max-width: 576px) {
+    .gallery-hero {
+        height: 100vh;
+        max-height: 720px; /* batasi tinggi di device kecil */
+    }
+
+    section {
+        min-height: 100vh;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* center vertikal */
+        align-items: center; /* center horizontal */
+        padding: 0;
+        background: var(--color-bg);
+    }
+    .site-header {
+        height: auto;
+        padding: 0 var(--spacing-md);
+
+        background: var(--color-bg);
+    }
+}
+
+/* Desktop: ikut lebar section (≤576px), proporsional */
+@media (min-width: 577px) {
+    .gallery-hero {
+        height: auto;
+        aspect-ratio: 4 / 5; /* proporsional, tidak terlalu tinggi */
+        border-radius: 12px; /* opsional: sudut lembut */
+        overflow: hidden;
+    }
+
+    section {
+        max-width: 576px;
+        height: auto;
+        margin: 0 auto;
+        padding: var(--spacing-xl) var(--spacing-md);
+        background: var(--color-bg);
+    }
+
+    .gallery-section {
+        max-width: 576px;
+    }
+
+    .site-header {
+        max-width: 576px;
+        height: auto;
+        margin: 0 auto;
+        padding: var(--spacing-xl) var(--spacing-md);
+        background: var(--color-bg);
+    }
+}
+
+/* Swiper area mesti full */
+.hero-swiper,
+.hero-swiper .swiper-wrapper,
+.hero-swiper .swiper-slide {
+    height: 100%;
+}
+
+.hero-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Pagination (dots) */
+.hero-swiper .swiper-pagination {
+    bottom: 14px !important;
+}
+
+.hero-swiper .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.7);
+    opacity: 1;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+    background: #fff;
+}
+
+/* Tombol navigasi (jika dipakai) */
+.hero-swiper .swiper-button-next,
+.hero-swiper .swiper-button-prev {
+    color: #fff;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
+}
+
+/* ---------- GRID 4 KOLOM ---------- */
+.gallery-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* sesuai konten kamu saat ini */
+    gap: var(--spacing-md, 12px);
+    padding: var(--spacing-md, 12px) 0;
+}
+
+/* Kartu grid */
+.gallery-grid > a {
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gallery-grid > a:hover {
+    transform: scale(1.015);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-grid > a img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Ratio khusus 4:5 untuk row yang diberi .ratio-4-5 */
+.gallery-grid.ratio-4-5 > a {
+    aspect-ratio: 4 / 5;
+}
+
+/* AOS friendly (hindari “lompat”) */
+[data-aos] {
+    will-change: transform, opacity;
+}
+
+/* Title wrapper dalam section gallery */
+.gallery-section .content-title {
+    width: 100%;
+    padding: var(--spacing-xl, 24px) var(--spacing-md, 12px);
+    text-align: center;
+}
+
+/* Safe guard lebar desktop (ikut pola layout global) */
+@media (min-width: 577px) {
+    .gallery-section {
+        max-width: 576px;
+    }
+}
+
+/* =========================================================
+      RESPONSIVENESS (typography ukuran sedang)
+      ========================================================= */
+@media (max-width: 767.98px) {
+    .title {
+        font-size: 2rem;
+        letter-spacing: 0.4em;
+    }
+    .initial {
+        font-size: 4rem;
+    }
+    .amp {
+        font-size: 3rem;
+    }
+    .names {
+        gap: var(--spacing-md);
+    }
+    .count-number {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .initial {
+        font-size: 5rem;
+    }
+    .amp {
+        font-size: 3.5rem;
+    }
+}
+
+/* =========================================================
+      CONTAINER RESPONSIF (layout global)
+      ========================================================= */
+.container {
+    width: 100%;
+    max-width: 576px; /* samakan dengan breakpoint mobile */
+    margin: 0 auto; /* center horizontal */
+    padding: 0 var(--spacing-md);
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+/* Mobile: setiap section full-screen & kontennya center */
+@media (max-width: 576px) {
+    section {
+        min-height: 100vh;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* center vertikal */
+        align-items: center; /* center horizontal */
+        padding: 0;
+    }
+}
+
+/* Desktop: tampilannya dibatasi seperti mobile (≤576px) */
+@media (min-width: 577px) {
+    section {
+        max-width: 576px;
+        height: auto;
+        margin: 0 auto;
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .bottom-nav {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 576px;
+        width: 100%;
+    }
+}
+
+
+
+/* =========================================================
+      ANIMATIONS (keyframes)
+      ========================================================= */
+@keyframes rotateScale {
+    0%,
+    100% {
+        transform: scale(0.9) rotate(0deg);
+    }
+    50% {
+        transform: scale(1) rotate(40deg);
+    }
+}
+
+@keyframes Scale {
+    0%,
+    100% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* =========================================================
+      SCROLL BLUR (efek saat scrolling)
+      ========================================================= */
+.scroll-blur .page-content {
+    filter: blur(4px);
+    transition: filter 0.3s ease-out;
+}
+
+/* =========================================================
+      CONTENT-TITLE (wrapper judul section)
+      ========================================================= */
+.content-title {
+    padding: var(--spacing-xl) var(--spacing-md);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Judul utama */
+.title-txt {
+    --rotate: -5deg;
+    position: relative;
+    display: inline-block;
+    font-family: var(--font-family-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    z-index: 1;
+}
+
+.title-txt::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140%;
+    height: 1.2em;
+    background: transparent;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(var(--rotate));
+    z-index: -1;
+    opacity: 0.8;
+}
+
+/* Subtitle */
+.subtitle-txt {
+    bottom: 0;
+    font-family: var(--font-family-base);
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.4;
+}
+
+/* =========================================================
+      SWIPER HERO (duplikat helper — sama seperti blok di atas)
+      ========================================================= */
+.gallery-section {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery-hero {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* Mobile: full screen feel */
+@media (max-width: 576px) {
+    .gallery-hero {
+        height: 100vh;
+        max-height: 720px;
+    }
+}
+
+/* Desktop: ikut lebar section (≤576px), tidak terlalu tinggi */
+@media (min-width: 577px) {
+    .gallery-hero {
+        height: auto;
+        aspect-ratio: 4 / 5; /* biar proporsional */
+        border-radius: 12px; /* opsional */
+    }
+}
+
+.hero-swiper,
+.hero-swiper .swiper-wrapper,
+.hero-swiper .swiper-slide {
+    height: 100%;
+}
+
+.hero-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Dots */
+.hero-swiper .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.7);
+    opacity: 1;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+    background: #fff;
+}
+
+/* Jika pakai tombol next/prev */
+.hero-swiper .swiper-button-next,
+.hero-swiper .swiper-button-prev {
+    color: #fff;
+}
+
+/* Animasi keluar */
+.fade-out {
+    animation: fadeOut 0.7s ease forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+}
+
+.site-footer {
+    background: var(
+        --glass-bg,
+        rgba(255, 255, 255, 0.1)
+    ); /* kalau mau transparan */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+.footer-inner {
+    font-size: var(--font-size-xs);
+}
+
+
+/* ========== CONTAINER FORM ========== */
+.guestbook-form{
+  width:100%;
+  max-width: var(--bp-sm);            /* 576px */
+  margin:0 auto;
+}
+
+/* Label kecil */
+.select-field > span{
+  display:block;
+  margin: 0 0 var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  opacity:.9;
+}
+
+/* ========== CHOICES: ukuran/lebar dasar ========== */
+.choices,
+.choices__inner,
+.choices__list--dropdown,
+.choices__list{
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+  font-size: clamp(var(--font-size-sm), 2.8vw, var(--font-size-md));
+}
+
+/* Input (closed) */
+.choices{ margin-bottom: var(--spacing-sm); }
+
+.choices__inner{
+  background: var(--color-light);
+  border: 1px solid var(--color-secondary);
+  min-height: calc(var(--spacing-md) * 2.75);  /* ~44px */
+  padding: var(--spacing-sm) var(--spacing-md);
+  box-shadow: 0 2px 10px rgba(0,0,0,.04);
+}
+
+.choices[data-type*=select-one] .choices__inner{
+  padding-right: calc(var(--spacing-lg) + var(--spacing-sm)); /* ruang caret */
+}
+
+/* Caret custom */
+.choices[data-type*=select-one]::after{
+  content:"";
+  position:absolute;
+  right: var(--spacing-sm);
+  top: calc(50% - 3px);
+  width:0;height:0;
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  border-top:6px solid var(--color-secondary);
+  opacity:.8;
+  pointer-events:none;
+}
+
+/* Placeholder */
+.choices__placeholder{ opacity:.7; }
+
+/* Hover & Focus */
+.is-focused .choices__inner,
+.choices__inner:hover{
+  border-color: color-mix(in srgb, var(--color-secondary) 85%, #000 15%);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+/* ========== Dropdown list ========== */
+.choices__list--dropdown{
+  background: var(--color-light);
+  border: 1px solid var(--color-secondary);
+  box-shadow: 0 12px 28px rgba(0,0,0,.12);
+  overflow: hidden;
+  z-index: 1001;
+}
+
+.choices__list--dropdown .choices__list{
+  max-height: 260px;
+}
+
+.choices__list--dropdown .choices__item{
+  padding: var(--spacing-sm) var(--spacing-md);
+  line-height:1.3;
+  color: var(--color-text);
+
+  
+}
+/* Pakai var(--color-text) untuk semua teks Choices */
+.choices__inner,
+.choices__list--single .choices__item,
+.choices__list--multiple .choices__item,
+.choices__list--dropdown .choices__item,
+.choices__input {
+  color: var(--color-text) !important;
+}
+
+/* Placeholder lebih redup tapi tetap ikut var(--color-text) */
+.choices__placeholder {
+  color: var(--color-text) !important;
+  opacity: .6; /* atau .7 sesuai selera */
+}
+
+/* Hover/terpilih: warna teks tetap, hanya background yang berubah */
+.choices__item--selectable.is-highlighted,
+.choices__list--dropdown .choices__item--selectable:hover,
+.choices__item--choice.is-selected {
+  color: var(--color-text) !important;
+}
+
