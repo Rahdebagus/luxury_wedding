@@ -305,8 +305,8 @@
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a href="{{ asset('img/Bersama_4.jpg') }}" class="glightbox" data-gallery="hero">
-                            <img src="{{ asset('img/Bersama_4.jpg') }}" alt="Gallery Hero 5" data-aos="zoom-in"
+                        <a href="{{ asset('img/Bersama_3.jpg') }}" class="glightbox" data-gallery="hero">
+                            <img src="{{ asset('img/Bersama_3.jpg') }}" alt="Gallery Hero 5" data-aos="zoom-in"
                                 data-aos-duration="600" />
                         </a>
                     </div>
