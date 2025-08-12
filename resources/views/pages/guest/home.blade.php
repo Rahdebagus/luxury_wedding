@@ -1,5 +1,15 @@
 @extends('layouts.guest.app')
 
+@section('title', 'Upacara Mesangih Suci')
+
+@section('meta')
+<meta property="og:title" content="Upacara Mesangih Suci">
+<meta property="og:description" content="Kami mengundang kehadiran Bapak/Ibu/Saudara/i untuk turut hadir, menyaksikan, dan memberikan doa restu.">
+    <meta property="og:image" content="https://balineseday.my.id/img/Bersama_1.jpg">
+    <meta property="og:url" content="https://balineseday.my.id">
+    <meta property="og:type" content="website">
+@endsection
+
 @section('content')
     <section style="padding: 0; margin: auto , 0; ">
         {{-- Hero Section --}}
@@ -15,7 +25,6 @@
                         YADNYA
                         PIODALAN NGENTEG LINGGIH MUPUK PEDAGINGAN LAN
                         MEPANDES/POTONG GIGI</h1>
-
                     <p class="subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">SAVE THE DATE</p>
 
                     <div class="invitee" data-aos="fade-up" data-aos-duration="900" data-aos-delay="450">
