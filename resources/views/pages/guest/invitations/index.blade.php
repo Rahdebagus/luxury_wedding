@@ -71,7 +71,7 @@
                 <div class="profile-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                     <h2 class="name">NOVIA</h2>
                     <p class="fullname">Ni Putu Novia Kirana Dewi</p>
-                    <p class="parents">Anak dari Bapak I Gede Rantika &amp; Ibu Ni Made Warsian</p>
+                    <p class="parents">Anak dari Bapak I Gede Rantika &amp; Ibu Ni Made Warsiani</p>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
                 <div class="profile-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                     <h2 class="name">⁠Rangga</h2>
                     <p class="fullname">⁠I Made Rangga Pradipta</p>
-                    <p class="parents">Anak dari Bapak I Gede Rantika &amp; Ibu Ni Made Warsian</p>
+                    <p class="parents">Anak dari Bapak I Gede Rantika &amp; Ibu Ni Made Warsiani</p>
                 </div>
             </div>
         </div>
@@ -281,8 +281,8 @@
             <div class="swiper hero-swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <a href="{{ asset('img/Bersama_1.jpg') }}" class="glightbox" data-gallery="hero">
-                            <img src="{{ asset('img/Bersama_1.jpg') }}" alt="Gallery Hero 1" data-aos="zoom-in"
+                        <a href="{{ asset('img/Bersama_fix.jpg') }}" class="glightbox" data-gallery="hero">
+                            <img src="{{ asset('img/Bersama_fix.jpg') }}" alt="Gallery Hero 1" data-aos="zoom-in"
                                 data-aos-duration="600" />
                         </a>
                     </div>

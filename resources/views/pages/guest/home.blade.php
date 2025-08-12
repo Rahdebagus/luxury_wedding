@@ -15,25 +15,35 @@
         {{-- Hero Section --}}
         <div class="save-date hero-cover" id="hero" style="overflow: hidden;">
             {{-- BG layers for fade --}}
-            <img class="hero-bg bg-a" src="{{ asset('img/Bersama_1.jpg') }}" alt="Background A" />
-            <img class="hero-bg bg-b hidden" src="{{ asset('img/Bersama_1.jpg') }}" alt="Background B" />
+
+            <img class="hero-bg bg-a" src="{{ asset('img/balinese.png') }}" alt="Background A" />
+            <img class="hero-bg bg-b hidden" src="{{ asset('img/balinese.png') }}" alt="Background B" />
 
             <div class="container hero-content">
-                <h1 class="title" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">MEPANDES</h1>
-                <p class="subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">SAVE THE DATE</p>
+                <div class=" content-wrapper">
+                    <h1 class="title" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">UPACARA ADAT DEWA
+                        YADNYA
+                        PIODALAN NGENTEG LINGGIH MUPUK PEDAGINGAN LAN
+                        MEPANDES/POTONG GIGI</h1>
+                    <p class="subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">SAVE THE DATE</p>
 
-                <div class="invitee" data-aos="fade-up" data-aos-duration="900" data-aos-delay="450">
-                    <div class="invitee-label">Invite to</div>
-                    <div id="guest-name" class="invitee-name">Bapak/Ibu/Saudara/i</div>
-                </div>
+                    <div class="invitee" data-aos="fade-up" data-aos-duration="900" data-aos-delay="450">
+                        <div class="invitee-label">Invite to</div>
+                        <div id="guest-name" class="invitee-name">Bapak/Ibu/Saudara/i</div>
+                    </div>
 
-                <p class="wedding-date" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">20 Agustus 2025</p>
-                <p class="wedding-location" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
-                    Br Tibu Tanggang, Desa Penyaringan, Kecamatan Mendoyo, Kabupaten Jembrana, Bali
-                </p>
+                    <p class="wedding-date" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">20 Agustus 2025
+                    </p>
+                    <p class="wedding-location" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+                        Br Tibu Tanggang, Desa Penyaringan, Kecamatan Mendoyo, Kabupaten Jembrana, Bali
+                    </p>
 
-                <div class="open-btn-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
-                    <button class="open-invitation-btn" id="open-invitation-btn">BUKA UNDANGAN</button>
+                    <div class="open-btn-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
+                        <button class="open-invitation-icon-btn" id="open-invitation-btn" aria-label="Buka Undangan">
+                            <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
