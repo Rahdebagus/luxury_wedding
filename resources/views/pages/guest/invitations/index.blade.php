@@ -84,7 +84,7 @@
                 <div class="profile-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                     <h2 class="name">Nadia</h2>
                     <p class="fullname">Ni Luh Gede Nadia Suciana Putri</p>
-                    <p class="parents">Anak dari Bapak I Komang Agus Sucipta &amp; Ibu⁠Ni Kade Yuliati</p>
+                    <p class="parents">Anak dari Bapak I Komang Agus Sucipta &amp; Ibu Ni Kade Yuliati</p>
                 </div>
             </div>
         </div>
