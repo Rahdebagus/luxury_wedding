@@ -110,7 +110,7 @@
                 <div class="profile-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                     <h2 class="name">Kelvin</h2>
                     <p class="fullname">⁠I Kadek Kelvin Sucipta Putra</p>
-                    <p class="parents">Anak dari Bapak I Komang Agus Sucipta &amp; Ibu⁠Ni Kade Yuliati</p>
+                    <p class="parents">Anak dari Bapak I Komang Agus Sucipta &amp; Ibu Ni Made Warsiani</p>
                 </div>
             </div>
         </div>
